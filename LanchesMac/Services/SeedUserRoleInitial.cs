@@ -53,22 +53,22 @@ namespace LanchesMac.Services
                 }
             }
 
-            if (_userManager.FindByEmailAsync("admin@localhost").Result == null)
+            if (_userManager.FindByEmailAsync("Denis Pereira").Result == null)
             {
                 IdentityUser user = new IdentityUser();
-                user.UserName = "admin@localhost";
-                user.Email = "admin@localhost";
-                user.NormalizedUserName = "ADMIN@LOCALHOST";
-                user.NormalizedEmail = "ADMIN@LOCALHOST";
+                user.UserName = "Denis Pereira";
+                user.Email = "denis@localhost";
+                user.NormalizedUserName = "DENIS@LOCALHOST";
+                user.NormalizedEmail = "DENIS@LOCALHOST";
                 user.EmailConfirmed = true;
                 user.LockoutEnabled = false;
                 user.SecurityStamp = Guid.NewGuid().ToString();
 
-                IdentityResult result = _userManager.CreateAsync(user, "Numsey#2022").Result;
+                IdentityResult result = _userManager.CreateAsync(user, "12345").Result;
 
                 if (result.Succeeded)
                 {
-                    _userManager.AddToRoleAsync(user, "Admin").Wait();
+                    _userManager.AddToRoleAsync(user, "Denis Pereira").Wait();
                 }
             }
         }
