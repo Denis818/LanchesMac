@@ -78,7 +78,7 @@ namespace LanchesMac.Controllers
                 }
                 else
                 {
-                    this.ModelState.AddModelError("Registro", "Falha ao registrar o usuário");
+                    this.ModelState.AddModelError("Registro", "Falha ao registrar, verifique o nome ou senha.");
                 }
             }
             return View(registroVM);    

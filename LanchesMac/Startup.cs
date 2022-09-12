@@ -20,8 +20,10 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        var connectionString = Configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(connectionString)
+        );
 
         services.AddIdentity<IdentityUser, IdentityRole>()
              .AddEntityFrameworkStores<AppDbContext>()
@@ -29,16 +31,19 @@ public class Startup
 
         services.Configure<ConfigurationImagens>(Configuration.GetSection("ConfigurationPastaImagens"));
 
-        //services.Configure<IdentityOptions>(options =>
-        //{
-        //    // Default Password settings.
-        //    options.Password.RequireDigit = false;
-        //    options.Password.RequireLowercase = false;
-        //    options.Password.RequireNonAlphanumeric = false;
-        //    options.Password.RequireUppercase = false;
-        //    options.Password.RequiredLength = 3;
-        //    options.Password.RequiredUniqueChars = 1;
-        //});
+        services.Configure<IdentityOptions>(options =>
+        {
+            // Default Password settings.
+            options.Password.RequireDigit = false;
+            options.Password.RequireLowercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = false;
+            options.Password.RequiredLength = 4;
+            //    options.Password.RequiredUniqueChars = 1;
+
+            //name options
+            options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        });
 
         services.AddTransient<ILancheRepository, LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
@@ -81,15 +86,11 @@ public class Startup
     public void Configure(IApplicationBuilder app,
         IWebHostEnvironment env, ISeedUserRoleInitial seedUserRoleInitial)
     {
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
-        else
-        {
-            app.UseExceptionHandler("/Home/Error");
-            app.UseHsts();
-        }
+        app.UseDeveloperExceptionPage();
+
+        app.UseExceptionHandler("/Home/Error");
+        app.UseHsts();
+
         app.UseHttpsRedirection();
 
         app.UseStaticFiles();
