@@ -18,7 +18,7 @@ namespace LanchesMac.Areas.Admin.Servicos
 
             if (minDate.HasValue)
             {
-                resultado = resultado.Where(x => x.PedidoEnviado >= minDate.Value);
+               resultado = resultado.Where(x => x.PedidoEnviado >= minDate.Value);
             }
 
             if (maxDate.HasValue)

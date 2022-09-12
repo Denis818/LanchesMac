@@ -86,11 +86,15 @@ public class Startup
     public void Configure(IApplicationBuilder app,
         IWebHostEnvironment env, ISeedUserRoleInitial seedUserRoleInitial)
     {
-        app.UseDeveloperExceptionPage();
-
-        app.UseExceptionHandler("/Home/Error");
-        app.UseHsts();
-
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Home/Error");
+            app.UseHsts();
+        }
         app.UseHttpsRedirection();
 
         app.UseStaticFiles();
@@ -105,7 +109,6 @@ public class Startup
 
         app.UseAuthentication();
         app.UseAuthorization();
-
 
         app.UseEndpoints(endpoints =>
         {

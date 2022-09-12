@@ -30,8 +30,8 @@ namespace LanchesMac.Areas.Admin.Controllers
                 maxDate = DateTime.Now;
             }
 
-            ViewData["minDate"] = minDate.Value.ToString("yyyy-MM-dd");
-            ViewData["maxDate"] = maxDate.Value.ToString("yyyy-MM-dd");
+            ViewData["minDate"] = minDate.Value.ToString("YYYY-MM-DDThh:mmTZD");
+            ViewData["maxDate"] = maxDate.Value.ToString("YYYY-MM-DDThh:mmTZD");
 
             var result = await relatorioVendasService.FindByDateAsync(minDate, maxDate);
             return View(result);
