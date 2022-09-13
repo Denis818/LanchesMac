@@ -1,8 +1,16 @@
 ﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
      <div class="container">
        <a class="navbar-brand" asp-area="" asp-controller="Home"asp-action="Index">
-          <img src="~/images/logo_lanche2-sfd.png" asp-append-version="true" />
-          LanchesMac
+          <img src="~/images/logonP.png" height="100px" width="200px" asp-append-version="true" />
+          <li class="nav-item">@await Component.InvokeAsync("CategoriaMenu")</li>
+          
+          <li class="nav-item">
+                  <form class="navbar-form navbar-right px-3" asp-controller="Lanche" asp-action="Search" method="get">
+                    <div class="form-group">
+                       <input type="text" class="form-control" placeholder="Procurar produto" name="searchString" value="@ViewData["searchString"]">
+                    </div>
+                 </form>
+                </li>
       </a>
      <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"
@@ -12,14 +20,14 @@
       <!-- Collapsible content -->
     <div class="navbar-collapse collapse" id="collapsibleNavbar" style="font-size: medium; font-weight: bold">
            <ul class="navbar-nav mr-auto">
-               <li class="nav-item">@await Component.InvokeAsync("CategoriaMenu")</li>
-                <li class="nav-item">
+               @*<li class="nav-item">@await Component.InvokeAsync("CategoriaMenu")</li>*@
+                @*<li class="nav-item">
                   <form class="navbar-form navbar-right" asp-controller="Lanche" asp-action="Search" method="get">
                     <div class="form-group">
                        <input type="text" class="form-control" placeholder="Procurar produto" name="searchString" value="@ViewData["searchString"]">
                     </div>
                  </form>
-                </li>
+                </li>*@
                <li class="nav-item"><a class="nav-link text-light" asp-area="" asp-controller="Contato" asp-action="Index">Contato</a></li>
                <li class="nav-item"><a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                <li class="nav-item">
