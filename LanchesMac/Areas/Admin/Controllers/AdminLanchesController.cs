@@ -19,12 +19,12 @@ namespace LanchesMac.Areas.Admin.Controllers
             _context = context;
         }
 
-        //// GET: Admin/AdminLanches
-        //public async Task<IActionResult> Index()
-        //{
-        //    var appDbContext = _context.Lanches.Include(l => l.Categoria);
-        //    return View(await appDbContext.ToListAsync());
-        //}
+        // GET: Admin/AdminLanches
+       /* public async Task<IActionResult> Index()
+        {
+            var appDbContext = _context.Lanches.Include(l => l.Categoria);
+            return View(await appDbContext.ToListAsync());
+        }*/
 
         public async Task<IActionResult> Index(string filter, int pageindex = 1, string sort ="Nome")
         {

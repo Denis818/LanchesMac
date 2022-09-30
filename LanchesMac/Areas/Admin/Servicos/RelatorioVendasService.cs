@@ -16,14 +16,19 @@ namespace LanchesMac.Areas.Admin.Servicos
         {
             var resultado = from obj in context.Pedidos select obj;
 
+            minDate?.ToUniversalTime();
+            maxDate?.ToUniversalTime();
+
             if (minDate.HasValue)
             {
-               resultado = resultado.Where(x => x.PedidoEnviado >= minDate.Value);
+               resultado = resultado.Where(x => x.PedidoEnviado.ToUniversalTime() >= minDate.Value.ToUniversalTime());
+             //  minDate?.ToUniversalTime();
             }
 
             if (maxDate.HasValue)
             {
-                resultado = resultado.Where(x => x.PedidoEnviado <= maxDate.Value);
+                resultado = resultado.Where(x => x.PedidoEnviado.ToUniversalTime() <= maxDate.Value.ToUniversalTime());
+               // maxDate?.ToUniversalTime();
             }
 
             return await resultado

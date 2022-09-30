@@ -23,15 +23,15 @@ namespace LanchesMac.Areas.Admin.Controllers
         {
             if (!minDate.HasValue)
             {
-                minDate = new DateTime(DateTime.Now.Year,1, 1);
+                minDate = new DateTime(DateTime.UtcNow.Year,1, 1);
             }
             if (!maxDate.HasValue)
             {
-                maxDate = DateTime.Now;
+                maxDate = DateTime.UtcNow;
             }
 
-            ViewData["minDate"] = minDate.Value.ToString("YYYY-MM-DDThh:mmTZD");
-            ViewData["maxDate"] = maxDate.Value.ToString("YYYY-MM-DDThh:mmTZD");
+            ViewData["minDate"] = minDate.Value.ToString("yyyy-MM-dd");
+            ViewData["maxDate"] = maxDate.Value.ToString("yyyy-MM-dd");
 
             var result = await relatorioVendasService.FindByDateAsync(minDate, maxDate);
             return View(result);

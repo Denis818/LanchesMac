@@ -58,12 +58,12 @@ namespace LanchesMac.Models
 
         [Display(Name = "Data do Pedido")]
         [DataType(DataType.Text)]
-        [DisplayFormat(DataFormatString = "{0: YYYY-MM-DDThh:mmTZD	}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm:ss}")]
         public DateTime PedidoEnviado { get; set; }
 
         [Display(Name = "Data Envio Pedido")]
         [DataType(DataType.Text)]
-        [DisplayFormat(DataFormatString = "{0: YYYY-MM-DDThh:mmTZD	}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime? PedidoEntregueEm { get; set; }
 
         public List<PedidoDetalhe> PedidoItens { get; set; }

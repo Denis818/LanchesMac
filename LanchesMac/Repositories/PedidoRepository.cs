@@ -18,7 +18,7 @@ namespace LanchesMac.Repositories
 
         public void CriarPedido(Pedido pedido)
         {
-            //pedido.PedidoEnviado = DateTime.Now;
+            pedido.PedidoEnviado = DateTime.UtcNow;
             _appDbContext.Pedidos.Add(pedido);
             _appDbContext.SaveChanges();
 

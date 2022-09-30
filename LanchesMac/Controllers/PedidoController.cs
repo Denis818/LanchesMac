@@ -30,6 +30,7 @@ namespace LanchesMac.Controllers
         {
             int totalItensPedido = 0;
             decimal precoTotalPedido = 0.0m;
+            pedido.PedidoEntregueEm = pedido.PedidoEnviado;
 
             //obtem os itens do carrinho de compra do cliente
             List<CarrinhoCompraItem> items = _carrinhoCompra.GetCarrinhoCompraItens();
