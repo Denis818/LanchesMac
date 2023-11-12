@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
 
 namespace LanchesMac;
+
 public class Startup
 {
     public Startup(IConfiguration configuration)
@@ -22,7 +23,7 @@ public class Startup
     {
         var connectionString = Configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(connectionString)
+            options.UseSqlServer(connectionString)
         );
 
         services.AddIdentity<IdentityUser, IdentityRole>()
@@ -48,7 +49,6 @@ public class Startup
         services.AddTransient<ILancheRepository, LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
         services.AddTransient<IPedidoRepository, PedidoRepository>();
-        services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
         services.AddScoped<RelatorioVendasService>();
         services.AddScoped<GraficoVendasService>();
 
@@ -83,8 +83,7 @@ public class Startup
         //});
     }
 
-    public void Configure(IApplicationBuilder app,
-        IWebHostEnvironment env, ISeedUserRoleInitial seedUserRoleInitial)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider service)
     {
         if (env.IsDevelopment())
         {
@@ -100,10 +99,7 @@ public class Startup
         app.UseStaticFiles();
         app.UseRouting();
 
-        //cria os perfis
-        seedUserRoleInitial.SeedRoles();
-        //cria os usuários e atribui ao perfil
-        seedUserRoleInitial.SeedUsers();
+        service.ConfigurarBancoDados();
 
         app.UseSession();
 
